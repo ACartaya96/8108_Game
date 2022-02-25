@@ -24,13 +24,15 @@ public class FieldofView : MonoBehaviour
 
     private IEnumerator FOVRoutine()
     {
-        float delay = 0.2f;
         WaitForSeconds wait = new WaitForSeconds(0.2f);
 
         while (true)
         {
             yield return wait;
+            FieldOFViewCheck();
         }
+
+        
     }
 
     private void FieldOFViewCheck()
@@ -42,7 +44,7 @@ public class FieldofView : MonoBehaviour
             Transform target = rangeChecks[0].transform;
             Vector3 directionToTarget = (target.position - transform.position).normalized;
             
-            if(Vector3.Angle(transform.position, directionToTarget) < angle/2)
+            if(Vector3.Angle(transform.forward, directionToTarget) < angle/2)
             {
                 float distancetoTarget = Vector3.Distance(transform.position, target.position);
 

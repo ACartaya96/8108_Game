@@ -6,6 +6,9 @@ using UnityEngine.AI;
 public class EnemyControlSystem : MonoBehaviour
 {
     NavMeshAgent navMeshAgent;
+    FieldofView fov;
+    public Transform[] movePoints;
+
     EnemyBaseState _state;
     public EnemyPatrolState PatrolState = new EnemyPatrolState();
     public EnemyChaseState ChaseState = new EnemyChaseState();
@@ -16,6 +19,7 @@ public class EnemyControlSystem : MonoBehaviour
         _state = PatrolState;
         _state.EnterState(this);
         navMeshAgent = GetComponent<NavMeshAgent>();
+        fov = GetComponent<FieldofView>();
     }
 
     private void Update()
@@ -29,11 +33,6 @@ public class EnemyControlSystem : MonoBehaviour
         state.EnterState(this);
     }
 
-    public bool EnemySight(bool spotted)
-    {
-       
-        return spotted;
-    }
 }
 
 

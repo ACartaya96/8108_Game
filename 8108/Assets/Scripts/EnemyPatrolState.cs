@@ -6,54 +6,52 @@ public class EnemyPatrolState : EnemyBaseState
 {
     public float speed;
 
-    public Transform[] movePoints;
+    
     private NavMeshAgent navMeshAgent;
+    FieldofView fov;
     public int randomSpot;
 
     public int startTime = 3;
     public float countdown;
-    bool canSeePlayer;
+
     public override void EnterState(EnemyControlSystem enemy)
     {
         navMeshAgent = enemy.GetComponent<NavMeshAgent>();
-        randomSpot = Random.Range(0, movePoints.Length);
+        fov = enemy.GetComponent<FieldofView>();
+        randomSpot = Random.Range(0, enemy.movePoints.Length);
         countdown = startTime;
     }
     public override void UpdateState(EnemyControlSystem enemy)
     {
-        LookingforPlayer(canSeePlayer);
-        Pathfinding();
-        if(canSeePlayer)
+        if(fov.canSeePlayer)
         {
             enemy.SwitchState(enemy.ChaseState);
         }
-        navMeshAgent.destination = movePoints[randomSpot].position;
+        navMeshAgent.destination = enemy.movePoints[randomSpot].position;
+        Pathfinding(enemy);
     }
     public override void OnCollisionEnter(EnemyControlSystem enemy)
     {
 
     }
 
-    void Pathfinding()
+    void Pathfinding(EnemyControlSystem enemy)
     {
-        if (Vector3.Distance(navMeshAgent.destination, movePoints[randomSpot].position) <= 0)
+        Debug.Log(navMeshAgent.remainingDistance.ToString());
+        if (navMeshAgent.remainingDistance <= 0) 
         {
-            if (countdown != 0)
+     
+            if (countdown == 0)
             {
-                countdown -= Time.deltaTime;
-            }
-            else
-            {
-                randomSpot = Random.Range(0, movePoints.Length);
+                randomSpot = Random.Range(0, enemy.movePoints.Length);
                 countdown = startTime;
             }
+           
+                Debug.Log(countdown.ToString());
+                countdown-= Time.deltaTime;
+                
+         
         }
-    }
-
-    bool LookingforPlayer(bool spotted)
-    {
-        //RayCast Logic
-        return spotted;
     }
 
 }
