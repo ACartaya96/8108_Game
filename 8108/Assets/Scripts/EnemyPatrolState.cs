@@ -1,4 +1,5 @@
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -23,8 +24,9 @@ public class EnemyPatrolState : EnemyBaseState
     }
     public override void UpdateState(EnemyControlSystem enemy)
     {
-        if(fov.canSeePlayer)
+        if (fov.canSeePlayer)
         {
+            Debug.Log(enemy.name + ": 8108 has been detected");
             enemy.SwitchState(enemy.ChaseState);
         }
         navMeshAgent.destination = enemy.movePoints[randomSpot].position;
@@ -37,19 +39,17 @@ public class EnemyPatrolState : EnemyBaseState
 
     void Pathfinding(EnemyControlSystem enemy)
     {
-        Debug.Log(navMeshAgent.remainingDistance.ToString());
-        if (navMeshAgent.remainingDistance <= 0) 
+        if (navMeshAgent.remainingDistance <= 0)
         {
-     
-            if (countdown == 0)
+           
+            countdown -= Time.deltaTime;
+            if (countdown <= 0)
             {
+                
                 randomSpot = Random.Range(0, enemy.movePoints.Length);
+                
                 countdown = startTime;
             }
-           
-                Debug.Log(countdown.ToString());
-                countdown-= Time.deltaTime;
-                
          
         }
     }

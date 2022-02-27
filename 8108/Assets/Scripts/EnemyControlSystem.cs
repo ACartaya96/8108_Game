@@ -8,6 +8,7 @@ public class EnemyControlSystem : MonoBehaviour
     NavMeshAgent navMeshAgent;
     FieldofView fov;
     public Transform[] movePoints;
+    public Transform playerLastPos;
 
     EnemyBaseState _state;
     public EnemyPatrolState PatrolState = new EnemyPatrolState();
