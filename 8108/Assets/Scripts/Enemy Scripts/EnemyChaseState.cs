@@ -15,15 +15,17 @@ public class EnemyChaseState : EnemyBaseState
     }
     public override void UpdateState(EnemyControlSystem enemy)
     {
-        if(!fov.canSeePlayer)
+        if (!fov.canSeePlayer)
         {
             enemy.playerLastPos.position = player.transform.position;
             navMeshAgent.destination = enemy.playerLastPos.position;
             Debug.Log(enemy.name + ": Lost Sight of 8108 sweeping the area");
             enemy.SwitchState(enemy.SearchState);
         }
+        Vector3.ClampMagnitude(navMeshAgent.destination, 3);
         navMeshAgent.destination = player.transform.position;
-        
+            
+
     }
     public override void OnCollisionEnter(EnemyControlSystem enemy)
     {

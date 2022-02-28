@@ -7,6 +7,7 @@ public class EnemyControlSystem : MonoBehaviour
 {
     NavMeshAgent navMeshAgent;
     FieldofView fov;
+    BoxCollider box;
     public Transform[] movePoints;
     public Transform playerLastPos;
 
@@ -15,11 +16,14 @@ public class EnemyControlSystem : MonoBehaviour
     public EnemyChaseState ChaseState = new EnemyChaseState();
     public EnemySearchState SearchState = new EnemySearchState();
 
+    public float damage = 0.10f;
+
     private void Start()
     {
         _state = PatrolState;
         _state.EnterState(this);
         navMeshAgent = GetComponent<NavMeshAgent>();
+        box = GetComponent<BoxCollider>();
         fov = GetComponent<FieldofView>();
     }
 
@@ -32,6 +36,16 @@ public class EnemyControlSystem : MonoBehaviour
     {
         _state = state;
         state.EnterState(this);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.CompareTag("Player"))
+        {
+            PlayerController player = other.gameObject.GetComponent<PlayerController>();
+            if(fov.canSeePlayer)
+                player.TakeDamage(this.damage);
+        }
     }
 
 }

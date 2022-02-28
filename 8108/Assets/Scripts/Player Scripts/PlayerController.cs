@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,14 @@ public class PlayerController : MonoBehaviour
     public float playerHeight =1.82f;
     public float crouchHeight = 1;
     Vector3 velocity;
+    float currentHealth;
+    public float maxHealth = 100;
+
+    void Start()
+    {
+        currentHealth = maxHealth;
+        Debug.Log(currentHealth.ToString());
+    }
 
     void Update()
     {
@@ -62,5 +71,23 @@ public class PlayerController : MonoBehaviour
         //Gravity
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);  // (1/2) * g * T^2
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        Debug.Log("Health " + currentHealth.ToString());
+
+        if(currentHealth <= 0)
+        {
+            Debug.Log("You have been captured");
+            Captured();
+        }
+    }
+
+    private void Captured()
+    {
+        Destroy(this.gameObject);
     }
 }
