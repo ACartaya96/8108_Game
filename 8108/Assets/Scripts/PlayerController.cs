@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     public float crouchHeight = 1;
     Vector3 velocity;
 
-
     void Update()
     {
         
@@ -32,12 +31,14 @@ public class PlayerController : MonoBehaviour
         //Setting Player Movement
         Vector3 move = transform.right * x + transform.forward * z;
         controller.Move(move * speed * Time.deltaTime);
+        
 
        
         //Running
         if (Input.GetKey(KeyCode.LeftShift))
         {
             speed = runningSpeed;
+            
         }
         else 
         {
