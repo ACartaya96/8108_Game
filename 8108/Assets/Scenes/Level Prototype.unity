@@ -575,7 +575,7 @@ GameObject:
   - component: {fileID: 211065961}
   - component: {fileID: 211065960}
   - component: {fileID: 211065959}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Entrance Wall(West)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1337,6 +1337,7 @@ GameObject:
   - component: {fileID: 675934130}
   - component: {fileID: 675934129}
   - component: {fileID: 675934128}
+  - component: {fileID: 675934134}
   - component: {fileID: 675934133}
   m_Layer: 6
   m_Name: 8108
@@ -1345,24 +1346,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!143 &675934128
-CharacterController:
+--- !u!54 &675934128
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675934127}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!136 &675934129
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1370,7 +1369,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675934127}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 496e026b7556b194298675de832cd18e, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -1451,17 +1450,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 675934127}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3a61fe11377fdb42af5ade6b7979eea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LookTarget: {fileID: 2133030640}
+  sensX: 25
+  sensY: 25
+--- !u!114 &675934134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675934127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76db6b2fadb3cff478ad9c04433761bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 675934128}
-  capsuleCollider: {fileID: 675934129}
-  walkingSpeed: 2
-  runningSpeed: 4
-  crouchSpeed: 1
-  gravity: -9.81
+  speed: 4
+  walkingSpeed: 4
+  runningSpeed: 6
+  crouchSpeed: 2.5
+  acceleration: 10
   playerHeight: 2
-  crouchHeight: 1.5
+  crouchHeight: 1
 --- !u!1 &757474565
 GameObject:
   m_ObjectHideFlags: 0
@@ -1662,7 +1675,7 @@ GameObject:
   - component: {fileID: 911019346}
   - component: {fileID: 911019345}
   - component: {fileID: 911019344}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Entrance Wall(East)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2253,7 +2266,7 @@ Transform:
   m_Children:
   - {fileID: 1855495138}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &1049406611
 NavMeshAgent:
@@ -2682,7 +2695,6 @@ GameObject:
   - component: {fileID: 1230905508}
   - component: {fileID: 1230905507}
   - component: {fileID: 1230905506}
-  - component: {fileID: 1230905509}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2749,28 +2761,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1230905505}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 675934132}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1230905509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1230905505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3a61fe11377fdb42af5ade6b7979eea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseSensitibity: 110
-  playerBody: {fileID: 675934132}
-  LookTarget: {fileID: 2133030640}
-  cam: {fileID: 1230905507}
 --- !u!1 &1243007194
 GameObject:
   m_ObjectHideFlags: 0
@@ -2783,7 +2779,7 @@ GameObject:
   - component: {fileID: 1243007197}
   - component: {fileID: 1243007196}
   - component: {fileID: 1243007195}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: South Hall Wall 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3455,7 +3451,7 @@ Transform:
   m_Children:
   - {fileID: 1731462}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1554622254
 MonoBehaviour:
@@ -4033,7 +4029,7 @@ GameObject:
   - component: {fileID: 1898603831}
   - component: {fileID: 1898603830}
   - component: {fileID: 1898603829}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Entrance Wall(South)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

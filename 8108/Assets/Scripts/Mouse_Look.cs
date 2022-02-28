@@ -4,31 +4,44 @@ using UnityEngine;
 
 public class Mouse_Look : MonoBehaviour
 {
-    public float mouseSensitibity = 100f;      // in video it was set too 100f
-
-    public Transform playerBody;                //should be First Person Player
+     
     public Transform LookTarget;
-    public Camera cam;
+
+    [SerializeField] private float sensX;
+    [SerializeField] private float sensY;
+    float multiplier = 0.01f;
+
+    Camera cam;
+    float mouseX;
+    float mouseY;
     float xRotation = 0f;
-    
+    float yRotation = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        cam.transform.LookAt(LookTarget);
+        cam = GetComponentInChildren<Camera>();
+        //cam.transform.LookAt(LookTarget);
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitibity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitibity * Time.deltaTime;
+        MyInput();
+   
+        
+        cam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        transform.rotation = Quaternion.Euler(0f, yRotation, 0f);
+    }
+    void MyInput()
+    {
+        mouseX = Input.GetAxis("Mouse X");
+        mouseY = Input.GetAxis("Mouse Y");
+        yRotation += mouseX * sensX * multiplier ;
+        xRotation -= mouseY * sensY * multiplier ;
 
-        xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f); //so he doesnt not look behind himself
-
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        playerBody.Rotate(Vector3.up * mouseX);
     }
 }
