@@ -22,9 +22,7 @@ public class PlayerController : MonoBehaviour
     public float playerHeight = 1.82f;
     public float crouchHeight = 1;
     Vector3 velocity;
-    float currentHealth;
-    public float maxHealth = 100;
-
+    
     //Input
     float horizontalMove;
     float verticalMove;
@@ -39,8 +37,8 @@ public class PlayerController : MonoBehaviour
     float wallCount = 4f;
 
     //healthBar
-    public int maxHealth = 100;
-    public int currentHealth;
+    public float maxHealth = 100;
+    public float currentHealth;
     public HealthBar healthBar;
 
 
@@ -177,7 +175,7 @@ public class PlayerController : MonoBehaviour
             wallCount = 4f;
         }
     }
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
