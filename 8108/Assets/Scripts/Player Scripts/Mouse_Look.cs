@@ -5,11 +5,7 @@ using UnityEngine;
 public class Mouse_Look : MonoBehaviour
 {
     public float mouseSensitibity = 100f;      // in video it was set too 100f
-<<<<<<< Updated upstream
     public Transform LookTarget;
-=======
-
->>>>>>> Stashed changes
     public Transform playerBody;                //should be First Person Player
     float xRotation = 0f;
 

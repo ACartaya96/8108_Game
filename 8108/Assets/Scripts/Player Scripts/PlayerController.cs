@@ -7,27 +7,13 @@ public class PlayerController : MonoBehaviour
 {
     CapsuleCollider coll;
 
-<<<<<<< Updated upstream
-    //move speed
-=======
     [Header("Movement")]
->>>>>>> Stashed changes
     public float speed;
     public float ClimbSpeed = 1f;
     public float walkingSpeed = 2f;
     public float runningSpeed = 5f; //  speed * 2
     public float crouchSpeed = 1f; //  speed / 2
     float movementMultiplier = 10f;
-<<<<<<< Updated upstream
-    float rbDrag = 6f;
-    [SerializeField] float acceleration = 10f;
-
-    //Crouching
-    public float playerHeight = 1.82f;
-    public float crouchHeight = 1;
-    Vector3 velocity;
-    
-=======
     public float rbDrag = 6f;
     [SerializeField] float acceleration = 10f;
 
@@ -36,7 +22,6 @@ public class PlayerController : MonoBehaviour
     public float crouchHeight = 1;
     Vector3 velocity;
 
->>>>>>> Stashed changes
     //Input
     float horizontalMove;
     float verticalMove;
@@ -50,14 +35,6 @@ public class PlayerController : MonoBehaviour
     Vector3 wallNormal;
     float wallCount = 4f;
 
-<<<<<<< Updated upstream
-    //healthBar
-    public float maxHealth = 100;
-    public float currentHealth;
-    public HealthBar healthBar;
-
-
-=======
     [Header("Stats")]
     public float maxHealth = 100;
     float currentHealth;
@@ -66,19 +43,15 @@ public class PlayerController : MonoBehaviour
     public HealthBar healthBar;
 
 
->>>>>>> Stashed changes
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         coll = GetComponent<CapsuleCollider>();
         currentHealth = maxHealth;
-<<<<<<< Updated upstream
-=======
         currentStamina = maxStamina;
         
 
->>>>>>> Stashed changes
         healthBar.setMaxHealth(maxHealth);
     }
 
@@ -87,11 +60,7 @@ public class PlayerController : MonoBehaviour
 
         if (NearWall())
         {
-<<<<<<< Updated upstream
-            if (FacingWall())
-=======
             if (FacingWall() && currentStamina > 0)
->>>>>>> Stashed changes
             {
                 if (Input.GetKeyUp(KeyCode.Space))
                 {
@@ -106,19 +75,6 @@ public class PlayerController : MonoBehaviour
         if (isClimbing)
         {
             speed = ClimbSpeed;
-<<<<<<< Updated upstream
-
-            ClimbWall();
-        }
-        else 
-        {
-            MyInput();
-            ControlDrag();
-            ControlSpeed();
-        }
-       
-       
-=======
 
             ClimbWall();
             currentStamina = Mathf.Clamp(currentStamina - 1 *Time.deltaTime, 0, maxStamina);
@@ -140,7 +96,6 @@ public class PlayerController : MonoBehaviour
  
         Debug.Log(currentStamina.ToString());
        
->>>>>>> Stashed changes
     }
     void MyInput()
     {
@@ -148,18 +103,11 @@ public class PlayerController : MonoBehaviour
         horizontalMove = Input.GetAxisRaw("Horizontal");
         verticalMove = Input.GetAxisRaw("Vertical");
         moveDirection = transform.forward * verticalMove + transform.right * horizontalMove;
-<<<<<<< Updated upstream
-
-        
-    }
-    void ControlDrag()
-=======
    
 
         
     }
    void ControlDrag()
->>>>>>> Stashed changes
     {
         rb.drag = rbDrag;
     }
@@ -171,10 +119,7 @@ public class PlayerController : MonoBehaviour
     void MovePlayer()
     {
         rb.AddForce(moveDirection.normalized * speed * movementMultiplier, ForceMode.Acceleration);
-<<<<<<< Updated upstream
-=======
         
->>>>>>> Stashed changes
     }
     void ControlSpeed()
     {
@@ -237,19 +182,11 @@ public class PlayerController : MonoBehaviour
     void StopClimbBar()
     {
         while (wallCount >= 0.0f)
-<<<<<<< Updated upstream
         {
             wallCount--;
         }
         if (wallCount == 0.0f)
         {
-=======
-        {
-            wallCount--;
-        }
-        if (wallCount == 0.0f)
-        {
->>>>>>> Stashed changes
             isClimbing = false;
             wallCount = 4f;
         }
@@ -260,8 +197,4 @@ public class PlayerController : MonoBehaviour
         healthBar.SetHealth(currentHealth);
     }
 
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes
