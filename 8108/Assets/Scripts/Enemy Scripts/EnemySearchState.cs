@@ -9,7 +9,7 @@ public class EnemySearchState : EnemyBaseState
     GameObject player;
     public int randomSpot;
 
-    public int startTime = 10;
+    public int startTime = 30;
     public float countdown;
 
     public override void EnterState(EnemyControlSystem enemy)
@@ -35,7 +35,7 @@ public class EnemySearchState : EnemyBaseState
             Debug.Log(enemy.name + ": 8108 has been lost continue Patrol.");
             enemy.SwitchState(enemy.PatrolState);
         }
-        Debug.Log(countdown.ToString());
+        //Debug.Log(countdown.ToString());
         countdown -= Time.deltaTime;
     }
     public override void OnCollisionEnter(EnemyControlSystem enemy)
@@ -45,7 +45,10 @@ public class EnemySearchState : EnemyBaseState
 
     void Searching(EnemyControlSystem enemy)
     {
-        navMeshAgent.destination = (Random.insideUnitSphere * 10.0f) + enemy.playerLastPos.position;
-        
+        if (navMeshAgent.remainingDistance <= 0)
+        {
+            navMeshAgent.destination = (Random.insideUnitSphere * 10.0f) + enemy.playerLastPos.position;
+            //Debug.Log(navMeshAgent.destination.ToString());
+        }
     }
 }

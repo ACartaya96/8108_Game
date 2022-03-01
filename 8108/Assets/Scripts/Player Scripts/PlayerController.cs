@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,8 @@ public class PlayerController : MonoBehaviour
     public float playerHeight = 1.82f;
     public float crouchHeight = 1;
     Vector3 velocity;
+    float currentHealth;
+    public float maxHealth = 100;
 
     //Input
     float horizontalMove;

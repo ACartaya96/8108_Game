@@ -14,6 +14,7 @@ public class FieldofView : MonoBehaviour
     public LayerMask obstructionMask;
 
     public bool canSeePlayer;
+    public bool canHearPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -66,5 +67,11 @@ public class FieldofView : MonoBehaviour
         {
             canSeePlayer = false;
         }
+    }
+
+    public void ReportCanHear(Vector3 location, EHeardSoundCategory category, float intesity)
+    {
+        Debug.Log("Heard sound " + category + " at " + location.ToString() + " with intensity of " + intesity);
+
     }
 }
