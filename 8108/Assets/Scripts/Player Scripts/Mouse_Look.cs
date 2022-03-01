@@ -26,6 +26,8 @@ public class Mouse_Look : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90f, 90f); //so he doesnt not look behind himself
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        
+        if(p)
         playerBody.Rotate(Vector3.up * mouseX);
     }
 }
