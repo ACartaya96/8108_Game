@@ -12,6 +12,7 @@ public class EnemyChaseState : EnemyBaseState
         player = GameObject.FindGameObjectWithTag("Player");
         fov = enemy.GetComponent<FieldofView>();
         navMeshAgent = enemy.GetComponent<NavMeshAgent>();
+        enemy.animator.SetBool("CanSeePlayer", true);
     }
     public override void UpdateState(EnemyControlSystem enemy)
     {
@@ -20,6 +21,8 @@ public class EnemyChaseState : EnemyBaseState
             enemy.playerLastPos.position = player.transform.position;
             navMeshAgent.destination = enemy.playerLastPos.position;
             Debug.Log(enemy.name + ": Lost Sight of 8108 sweeping the area");
+            
+            
             enemy.SwitchState(enemy.SearchState);
         }
         Vector3.ClampMagnitude(navMeshAgent.destination, 3);

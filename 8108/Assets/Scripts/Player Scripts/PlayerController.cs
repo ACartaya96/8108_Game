@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     CapsuleCollider coll;
+    Camera _camera;
 
     [Header("Movement")]
     public float speed;
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
 
     //climbing
-    bool isClimbing;
+    public bool isClimbing;
     public LayerMask wallMask;
     Vector3 wallPoint;
     Vector3 wallNormal;
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         coll = GetComponent<CapsuleCollider>();
+        _camera = Camera.main;
         currentHealth = maxHealth;
         currentStamina = maxStamina;
         
@@ -93,9 +95,19 @@ public class PlayerController : MonoBehaviour
         {
             isClimbing = !isClimbing;
         }
+
+        var nearestGameObject = GetNearestGameObject();
+        if (nearestGameObject == null) return;
+           if(Input.GetButtonDown("Fire1"))
+            {
+                var interactable = nearestGameObject.GetComponent<IInteractable>();
+            Debug.Log(nearestGameObject.name);
+                if (interactable == null) return;
+                
+                interactable.Interact();
+            }
+  
  
-        Debug.Log("Stamina: " + currentStamina.ToString());
-       
     }
     void MyInput()
     {
@@ -203,6 +215,17 @@ public class PlayerController : MonoBehaviour
     void Captured()
     {
         Destroy(this.gameObject);
+    }
+
+    private GameObject GetNearestGameObject()
+    {
+        GameObject result = null;
+        var ray = _camera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out var hit, 3))
+        {
+            result = hit.transform.gameObject;
+        }
+        return result;
     }
 
 }

@@ -6,7 +6,7 @@ public class Mouse_Look : MonoBehaviour
 {
     public float mouseSensitibity = 100f;      // in video it was set too 100f
     public Transform LookTarget;
-    public Transform playerBody;                //should be First Person Player
+    public GameObject playerBody;                //should be First Person Player
     float xRotation = 0f;
 
     // Start is called before the first frame update
@@ -22,12 +22,12 @@ public class Mouse_Look : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitibity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitibity * Time.deltaTime;
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f); //so he doesnt not look behind himself
+      
+        xRotation = Mathf.Clamp(xRotation - mouseY, -90f, 90f); //so he doesn't not look behind himself
 
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        transform.localEulerAngles = new Vector3(xRotation, 0f, 0f);
         
-        //if(p)
-        playerBody.Rotate(Vector3.up * mouseX);
+        //if(!playerBody.GetComponent<PlayerController>().isClimbing)
+            playerBody.transform.Rotate(Vector3.up * mouseX);
     }
 }

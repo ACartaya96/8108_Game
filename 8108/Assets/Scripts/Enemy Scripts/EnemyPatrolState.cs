@@ -20,6 +20,10 @@ public class EnemyPatrolState : EnemyBaseState
         navMeshAgent = enemy.GetComponent<NavMeshAgent>();
         fov = enemy.GetComponent<FieldofView>();
         randomSpot = Random.Range(0, enemy.movePoints.Length);
+
+        enemy.animator.SetBool("isSearching", false);
+        enemy.animator.SetBool("CanSeePlayer", false);
+
         countdown = startTime;
     }
     public override void UpdateState(EnemyControlSystem enemy)
@@ -27,6 +31,7 @@ public class EnemyPatrolState : EnemyBaseState
         if (fov.canSeePlayer)
         {
             Debug.Log(enemy.name + ": 8108 has been detected");
+           
             enemy.SwitchState(enemy.ChaseState);
         }
         navMeshAgent.destination = enemy.movePoints[randomSpot].position;

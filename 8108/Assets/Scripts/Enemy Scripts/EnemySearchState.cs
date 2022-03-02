@@ -17,6 +17,10 @@ public class EnemySearchState : EnemyBaseState
         player = GameObject.FindGameObjectWithTag("Player");
         fov = enemy.GetComponent<FieldofView>();
         navMeshAgent = enemy.GetComponent<NavMeshAgent>();
+
+        enemy.animator.SetBool("CanSeePlayer", false);
+        enemy.animator.SetBool("isSearching", true);
+
         countdown = startTime;
     }
     public override void UpdateState(EnemyControlSystem enemy)
@@ -24,6 +28,7 @@ public class EnemySearchState : EnemyBaseState
         if (fov.canSeePlayer)
         {
             Debug.Log(enemy.name + ": 8108 has been detected");
+            
             enemy.SwitchState(enemy.ChaseState);
         }
         else if (countdown >= 0)
@@ -33,6 +38,9 @@ public class EnemySearchState : EnemyBaseState
         else
         {
             Debug.Log(enemy.name + ": 8108 has been lost continue Patrol.");
+            
+          
+            
             enemy.SwitchState(enemy.PatrolState);
         }
         //Debug.Log(countdown.ToString());
