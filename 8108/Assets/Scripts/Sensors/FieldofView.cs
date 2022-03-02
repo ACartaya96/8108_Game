@@ -7,6 +7,7 @@ public class FieldofView : MonoBehaviour
     public float radius;
     [Range(0,360)]
     public float angle;
+    public float heightCap = 4.0f;
 
     public GameObject playerRef;
 
@@ -49,9 +50,16 @@ public class FieldofView : MonoBehaviour
             {
                 float distancetoTarget = Vector3.Distance(transform.position, target.position);
 
-                if (!Physics.Raycast(transform.position, directionToTarget, distancetoTarget, obstructionMask))
+                if (playerRef.transform.position.y < radius / heightCap)
                 {
-                    canSeePlayer = true;
+                    if (!Physics.Raycast(transform.position, directionToTarget, distancetoTarget, obstructionMask))
+                    {
+                        canSeePlayer = true;
+                    }
+                    else
+                    {
+                        canSeePlayer = false;
+                    }
                 }
                 else
                 {
