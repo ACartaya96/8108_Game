@@ -303,6 +303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338f101c2b920134faa8083e7fd65928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  switchPos: {fileID: 0}
   movePoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -329,6 +331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 20
   angle: 160
+  heightCap: 4
   playerRef: {fileID: 0}
   targetMask:
     serializedVersion: 2
