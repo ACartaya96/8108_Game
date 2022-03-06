@@ -1040,7 +1040,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &601166280
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1601,7 +1601,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &898123479
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2239,12 +2239,16 @@ MonoBehaviour:
     - DON''T GET SUCKED
     UP!
 
+    - HIDE IN THE VENTS!!!
 
     CONTROLS
 
-    -WASD for Movement
+    -WASD for Movement             
+    -P for PAUSE
 
-    -SPACE to Stick onto walls.'
+    -SPACE to Stick onto walls.
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9b8be51234248e34b92805b0d50bdfd3, type: 2}
   m_sharedMaterial: {fileID: 920336871228708930, guid: 9b8be51234248e34b92805b0d50bdfd3, type: 2}
