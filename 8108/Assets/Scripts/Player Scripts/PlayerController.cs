@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
         currentStamina = maxStamina;
 
 
-        //healthBar.setMaxHealth(maxHealth);
+        healthBar.setMaxHealth(maxHealth);
     }
 
     void Update()
@@ -236,7 +236,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
-        //healthBar.SetHealth(currentHealth);
+        healthBar.SetHealth(currentHealth);
         Debug.Log("Health: " + currentHealth.ToString());
         if (currentHealth <= 0)
             Captured();
