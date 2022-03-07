@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         GameIsPaused = false;
         Cursor.visible = false;
-        desiredMode = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
 
     }
     void Pause()
@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         GameIsPaused = true;
         Cursor.visible = true;
-        desiredMode = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.None;
         {
             Cursor.lockState = desiredMode;
         }
@@ -84,15 +84,17 @@ public class GameManager : MonoBehaviour
     public void YouWin()
     {
         Cursor.visible = true;
-        desiredMode = CursorLockMode.None;
+        Cursor .lockState= CursorLockMode.None;
         SceneManager.LoadScene("Win Screen");
+   
     }
 
     public void YouLose()
     {
         Cursor.visible = true;
-        desiredMode = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("Game Over Screen");
+  
     }
     #endregion
 }
