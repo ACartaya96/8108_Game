@@ -34,7 +34,6 @@ public class PlayerController : MonoBehaviour
     public LayerMask wallMask;
     Vector3 wallPoint;
     Vector3 wallNormal;
-    float wallCount = 4f;
 
     [Header("Stats")]
     public float maxHealth = 100;
@@ -44,14 +43,19 @@ public class PlayerController : MonoBehaviour
     public HealthBar healthBar;
     public StaminaBar staminaBar;
 
-    [SerializeField] Transform groundPos;
     bool isMoving;
     
-
-
+    [Header("GroundCheck")]
+    public Transform groundCheck;
+    public float groundDistance = 0.1f;
+    public LayerMask groundMask;
+    public bool isGrounded;
 
     private void Start()
     {
+        //ground Check
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         coll = GetComponent<CapsuleCollider>();
@@ -67,6 +71,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (NearWall())
         {
@@ -119,7 +124,7 @@ public class PlayerController : MonoBehaviour
 
         
 
-       /* if(isGrounded())
+       if(isGrounded)
         {
             FindObjectOfType<SoundManager>().Play("Player Land");
             rbDrag = 6f;
@@ -127,7 +132,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             rbDrag = 0f;
-        }*/
+        }
 
     }
     void MyInput()
@@ -252,25 +257,6 @@ public class PlayerController : MonoBehaviour
         }
         return result;
     }
-
-    /*bool isGrounded()
-    {
-
-       // RaycastHit hit = Physics.BoxCast(coll.bounds.center, coll.bounds.size, Vector3.down, Quaternion.identity, 1f, LayerMask.NameToLayer("Ground"));
-        Color rayColor;
-
-        if (hit.collider != null)
-        {
-            rayColor = Color.red;
-        }
-        else
-        {
-            rayColor = Color.green;
-        }
-
-        Debug.DrawRay(coll.bounds.center, Vector3.down * (coll.bounds.extents.y), rayColor);
-        return hit.collider != null;
-    }*/
 
     private void OnTriggerEnter(Collider other)
     {
