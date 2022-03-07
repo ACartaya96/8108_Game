@@ -2316,18 +2316,21 @@ MonoBehaviour:
       m_Calls: []
   m_text: '- YOU ARE EXPERIMENT 8108, A GELATINOUS BEING HELD CAPTIVE.
 
-    - ESCAPE
-    FROM THE FACILITY BY STEALING A CARD KEY FROM THE GUARDS.
+    - YOU
+    CAN PASS THROUGH VENTS TO AVOID GUARDS
 
-    - DON''T GET SUCKED
-    UP!
+    - DON''T GET SUCKED UP!
 
 
     CONTROLS
 
-    -WASD for Movement
+    -WASD
+    for Movement
 
-    -SPACE to Stick onto walls.'
+    -SPACE to Stick onto walls.
+
+    -LEFT CLICK on reboot switch
+    to diable guards.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9b8be51234248e34b92805b0d50bdfd3, type: 2}
   m_sharedMaterial: {fileID: 920336871228708930, guid: 9b8be51234248e34b92805b0d50bdfd3, type: 2}
