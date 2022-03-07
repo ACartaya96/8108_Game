@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance = null;
 
     [Header ("Pause Menu")]
-    public static bool GameIsPaused = false;
+    public bool GameIsPaused = false;
     public GameObject pauseMenuUI;
     CursorLockMode desiredMode;
     // Start is called before the first frame update
@@ -16,10 +16,7 @@ public class GameManager : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
-        else if (Instance != this)
-            Destroy(gameObject);
-
-        DontDestroyOnLoad(gameObject);
+        
     }
 
     // Update is called once per frame
@@ -61,7 +58,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         GameIsPaused = false;
         Cursor.visible = false;
-        desiredMode = CursorLockMode.Confined;
+        desiredMode = CursorLockMode.Locked;
 
     }
     void Pause()
@@ -86,11 +83,15 @@ public class GameManager : MonoBehaviour
     #region Win & Lose Conditions
     public void YouWin()
     {
+        Cursor.visible = true;
+        desiredMode = CursorLockMode.None;
         SceneManager.LoadScene("Win Screen");
     }
 
     public void YouLose()
     {
+        Cursor.visible = true;
+        desiredMode = CursorLockMode.None;
         SceneManager.LoadScene("Game Over Screen");
     }
     #endregion

@@ -15,7 +15,7 @@ public class Mouse_Look : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        
+
     }
 
     // Update is called once per frame
@@ -24,7 +24,9 @@ public class Mouse_Look : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitibity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitibity * Time.deltaTime;
 
-      
+        if(GameManager.Instance.GameIsPaused == false)
+            Cursor.lockState = CursorLockMode.Locked;
+
         xRotation = Mathf.Clamp(xRotation - mouseY, -90f, 90f); //so he doesn't not look behind himself
 
         transform.localEulerAngles = new Vector3(xRotation, 0f, 0f);

@@ -15,7 +15,7 @@ public class BotSwitch : MonoBehaviour, IInteractable
     public void Interact()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (Vector3.Distance(enemy.GetComponent<EnemyControlSystem>().switchPos.position, player.transform.position) <= 1.75 && enemy.GetComponent<EnemyControlSystem>()._state != enemy.GetComponent<EnemyControlSystem>().DisabledState)
+        if (Vector3.Distance(enemy.GetComponent<EnemyControlSystem>().switchPos.position, player.transform.position) <= 3.0f && enemy.GetComponent<EnemyControlSystem>()._state != enemy.GetComponent<EnemyControlSystem>().DisabledState)
             Switch();
     }
 }
