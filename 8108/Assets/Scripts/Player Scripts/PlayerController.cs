@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     public float maxStamina = 20;
     float currentStamina;
     public HealthBar healthBar;
+    public StaminaBar staminaBar;
 
     [SerializeField] Transform groundPos;
     bool isMoving;
@@ -60,6 +61,8 @@ public class PlayerController : MonoBehaviour
 
 
         healthBar.setMaxHealth(maxHealth);
+        staminaBar.SetStamina(maxStamina);
+
     }
 
     void Update()
@@ -85,6 +88,7 @@ public class PlayerController : MonoBehaviour
 
             ClimbWall();
             currentStamina = Mathf.Clamp(currentStamina - 1 * Time.deltaTime, 0, maxStamina);
+            staminaBar.SetStamina(currentStamina);
 
         }
         else
@@ -94,6 +98,7 @@ public class PlayerController : MonoBehaviour
             ControlSpeed();
 
             currentStamina = Mathf.Clamp(currentStamina + 1 * Time.deltaTime, 0, maxStamina);
+            staminaBar.SetStamina(currentStamina);
 
         }
         if (currentStamina <= 0)
@@ -221,18 +226,7 @@ public class PlayerController : MonoBehaviour
 
         transform.rotation = Quaternion.LookRotation(-wallNormal);
     }
-    void StopClimbBar()
-    {
-        while (wallCount >= 0.0f)
-        {
-            wallCount--;
-        }
-        if (wallCount == 0.0f)
-        {
-            isClimbing = false;
-            wallCount = 4f;
-        }
-    }
+
     public void TakeDamage(float damage)
     {
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
