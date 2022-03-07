@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     Vector3 moveDirection;
     Rigidbody rb;
 
-    //climbing
+    [Header("Climbing")]
     public bool isClimbing;
     public LayerMask wallMask;
     Vector3 wallPoint;
@@ -43,6 +43,11 @@ public class PlayerController : MonoBehaviour
     float currentStamina;
     public HealthBar healthBar;
 
+    [SerializeField] Transform groundPos;
+    bool isMoving;
+    
+
+
 
     private void Start()
     {
@@ -52,9 +57,9 @@ public class PlayerController : MonoBehaviour
         _camera = Camera.main;
         currentHealth = maxHealth;
         currentStamina = maxStamina;
-        
 
-        //healthBar.setMaxHealth(maxHealth);
+
+        healthBar.setMaxHealth(maxHealth);
     }
 
     void Update()
@@ -70,7 +75,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        else 
+        else
         {
             isClimbing = false;
         }
@@ -79,10 +84,10 @@ public class PlayerController : MonoBehaviour
             speed = ClimbSpeed;
 
             ClimbWall();
-            currentStamina = Mathf.Clamp(currentStamina - 1 *Time.deltaTime, 0, maxStamina);
+            currentStamina = Mathf.Clamp(currentStamina - 1 * Time.deltaTime, 0, maxStamina);
 
         }
-        else 
+        else
         {
             MyInput();
             ControlDrag();
@@ -91,23 +96,34 @@ public class PlayerController : MonoBehaviour
             currentStamina = Mathf.Clamp(currentStamina + 1 * Time.deltaTime, 0, maxStamina);
 
         }
-        if(currentStamina <= 0)
+        if (currentStamina <= 0)
         {
             isClimbing = !isClimbing;
         }
 
         var nearestGameObject = GetNearestGameObject();
         if (nearestGameObject == null) return;
-           if(Input.GetButtonDown("Fire1"))
-            {
-                var interactable = nearestGameObject.GetComponent<IInteractable>();
-            Debug.Log(nearestGameObject.name);
-                if (interactable == null) return;
-                
-                interactable.Interact();
-            }
-  
- 
+        if (Input.GetButtonDown("Fire1"))
+        {
+            var interactable = nearestGameObject.GetComponent<IInteractable>();
+            //Debug.Log(nearestGameObject.name);
+            if (interactable == null) return;
+
+            interactable.Interact();
+        }
+
+        
+
+       /* if(isGrounded())
+        {
+            FindObjectOfType<SoundManager>().Play("Player Land");
+            rbDrag = 6f;
+        }
+        else
+        {
+            rbDrag = 0f;
+        }*/
+
     }
     void MyInput()
     {
@@ -115,11 +131,16 @@ public class PlayerController : MonoBehaviour
         horizontalMove = Input.GetAxisRaw("Horizontal");
         verticalMove = Input.GetAxisRaw("Vertical");
         moveDirection = transform.forward * verticalMove + transform.right * horizontalMove;
-   
 
-        
+        if (rb.velocity.magnitude >= 1)
+            isMoving = true;
+        else
+            isMoving = false;
+
+
+
     }
-   void ControlDrag()
+    void ControlDrag()
     {
         rb.drag = rbDrag;
     }
@@ -131,7 +152,16 @@ public class PlayerController : MonoBehaviour
     void MovePlayer()
     {
         rb.AddForce(moveDirection.normalized * speed * movementMultiplier, ForceMode.Acceleration);
-        
+
+        if (isMoving)//&& !isGrounded())
+            if (!SoundManager.Instance.isPlaying("Player Step"))
+            {
+                FindObjectOfType<SoundManager>().Play("Player Step");
+                
+            }
+                
+        //else
+           // FindObjectOfType<SoundManager>().Stop("Player Step");
     }
     void ControlSpeed()
     {
@@ -206,7 +236,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
-        //healthBar.SetHealth(currentHealth);
+        healthBar.SetHealth(currentHealth);
         Debug.Log("Health: " + currentHealth.ToString());
         if (currentHealth <= 0)
             Captured();
@@ -215,6 +245,7 @@ public class PlayerController : MonoBehaviour
     void Captured()
     {
         Destroy(this.gameObject);
+        GameManager.Instance.YouLose();
     }
 
     private GameObject GetNearestGameObject()
@@ -227,5 +258,33 @@ public class PlayerController : MonoBehaviour
         }
         return result;
     }
+
+    /*bool isGrounded()
+    {
+
+       // RaycastHit hit = Physics.BoxCast(coll.bounds.center, coll.bounds.size, Vector3.down, Quaternion.identity, 1f, LayerMask.NameToLayer("Ground"));
+        Color rayColor;
+
+        if (hit.collider != null)
+        {
+            rayColor = Color.red;
+        }
+        else
+        {
+            rayColor = Color.green;
+        }
+
+        Debug.DrawRay(coll.bounds.center, Vector3.down * (coll.bounds.extents.y), rayColor);
+        return hit.collider != null;
+    }*/
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Win Door"))
+        {
+            GameManager.Instance.YouWin();
+        }
+    }
+
 
 }
