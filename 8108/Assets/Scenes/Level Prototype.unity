@@ -27891,7 +27891,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.05
   far clip plane: 1000
   field of view: 79.1
   orthographic: 0
@@ -27938,8 +27938,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitibity: 720
-  LookTarget: {fileID: 0}
-  playerBody: {fileID: 2003462015}
+  player: {fileID: 2003462015}
+  playerBody: {fileID: 2003462021}
+  camRotateSpeed: -0.5
 --- !u!4 &7170566271444267282
 Transform:
   m_ObjectHideFlags: 0

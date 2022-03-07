@@ -5,15 +5,17 @@ using UnityEngine;
 public class Mouse_Look : MonoBehaviour
 {
     public float mouseSensitibity = 100f;      // in video it was set too 100f
-    public Transform LookTarget;
-    public GameObject playerBody;                //should be First Person Player
+    public GameObject player;                //should be First Person Player
+    public Transform playerBody;
     float xRotation = 0f;
+    public float camRotateSpeed =-0.5f;
+    private Vector3 rotateValue;  
 
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        transform.LookAt(LookTarget);
+        
     }
 
     // Update is called once per frame
@@ -26,8 +28,11 @@ public class Mouse_Look : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation - mouseY, -90f, 90f); //so he doesn't not look behind himself
 
         transform.localEulerAngles = new Vector3(xRotation, 0f, 0f);
+        player.transform.Rotate(Vector3.up * mouseX);
+        if(player.GetComponent<PlayerController>().isClimbing)
+        {
+            transform.rotation *= Quaternion.Euler(0, 180, 0);
+        } 
         
-        //if(!playerBody.GetComponent<PlayerController>().isClimbing)
-            playerBody.transform.Rotate(Vector3.up * mouseX);
     }
 }
