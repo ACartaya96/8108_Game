@@ -1,7 +1,7 @@
 # 8108_Game
 # The-AprenticeKnight
  
-This was our FPS stealth game inspired by SCP. The project had a deadline of less than a month, and the team needed to provide some form of intelligent AI, and an understanding of level design, and art using the Unity Engine. In the game, you play as Experiment 8108 also known as BloB by the dev team, and your job is to escape the faciity before being captured by the security drones. The project had a major constraint where we were only allowed two rooms that had to be a linear path to get from point A to point B.
+This was our FPS stealth game inspired by SCP. The project had a deadline of less than a month, and the team needed to provide some form of intelligent AI, and an understanding of level design, and art using the Unity Engine. In the game, you play as Experiment 8108 also known as BloB by the dev team, and your job is to escape the facility before being captured by the security drones. The project had a major constraint where we were only allowed two rooms that had to be a linear path to get from point A to point B.
 
 ## Table of Contents
 - [Installation](#installation)
