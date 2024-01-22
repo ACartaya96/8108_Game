@@ -32,7 +32,7 @@ This was our FPS stealth game inspired by SCP. The project had a deadline of les
      
      ■	Chase. The drone's simplest behavior was chase as when they see the player they begin to give chase to attempt to capture BloB.
       
-     ■  Search. We wanted to drones to have an additional behavior as Patrol->Chase->Patrol felt too mechanical, and amateurish. We decided to make an intermedium mechanic where the drone will search a small area by saving the last known player location and searching around that area for a couple of seconds, before returning to patrol.
+     ■    Search. We wanted to drones to have an additional behavior as Patrol->Chase->Patrol felt too mechanical, and amateurish. We decided to make an intermedium mechanic where the drone will search a small area by saving the last known player location and searching around that area for a couple of seconds, before returning to patrol.
      
 ### Acknowledgment
 Alexander Cartaya
